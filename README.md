@@ -28,7 +28,7 @@ The package uses the modular AWS SDK v3, which includes `@aws-sdk/client-cloudwa
 
 Version 2.0.0 introduces breaking changes due to the migration from AWS SDK v2 to v3:
 
-- **Node.js requirement**: Now requires Node.js 18.0.0 or higher
+- **Node.js requirement**: Now requires Node.js 20.0.0 or higher
 - **AWS SDK v3**: Uses the modern, modular AWS SDK v3 with improved performance and smaller bundle sizes
 - **Async operations**: Internal implementation now uses async/await patterns for better reliability
 - **Configuration compatibility**: All existing configuration options remain the same and are fully backward compatible
