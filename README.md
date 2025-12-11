@@ -8,6 +8,12 @@ With **aws-cloudwatch-statsd-backend** you can replace Graphite in favour of [AW
 
 Counters, timers, gauges and sets are all supported.
 
+## Requirements
+
+- **Node.js**: Version 18.0.0 or higher
+- **AWS SDK**: Version 3.x (automatically installed)
+- **StatsD**: Compatible with standard StatsD implementations
+
 ## Installation
 
 You need node.js installed on your system aswell as StatsD. Follow the instructions on their sites or see this [blog post/tutorial](http://blog.simpletask.se/aws-clouwadwatch-statsd-backend/) on how to install these components on a Windows system.
@@ -16,7 +22,18 @@ The CloudWatch backend is an npm package that can be installed with the npm comm
 
     npm install aws-cloudwatch-statsd-backend
 
-The package has two depdencies that should be installed automatically, [awssum](https://npmjs.org/package/awssum) and [fmt](https://npmjs.org/package/fmt). Awssum is a node.js package encapsulating the AWS API.
+The package uses the modular AWS SDK v3, which includes `@aws-sdk/client-cloudwatch` and `@aws-sdk/credential-providers` as dependencies.
+
+## Migration from v1.x to v2.x
+
+Version 2.0.0 introduces breaking changes due to the migration from AWS SDK v2 to v3:
+
+- **Node.js requirement**: Now requires Node.js 18.0.0 or higher
+- **AWS SDK v3**: Uses the modern, modular AWS SDK v3 with improved performance and smaller bundle sizes
+- **Async operations**: Internal implementation now uses async/await patterns for better reliability
+- **Configuration compatibility**: All existing configuration options remain the same and are fully backward compatible
+
+If you're upgrading from v1.x, simply update your package.json and run `npm install`. No configuration changes are required.
 
 ## Configuration
 
@@ -38,9 +55,9 @@ The following demonstrates the minimum config for the CloudWatch backend.
 
 The access keys can be you personal credentials to AWS but it is highly recommended to create an ad hoc user via Amazon's IAM service and use those credentials.
 
-The region is for example `EU_WEST_1` or `US_EAST_1`. Region should be in capital letter and separated by `_` instead of `-`.
+The region should be specified using AWS region codes such as `us-east-1`, `eu-west-1`, `ap-southeast-2`, etc. See [AWS Regions and Endpoints](https://docs.aws.amazon.com/general/latest/gr/rande.html) for a complete list of region codes.
 
-The above will create a metric with the default namespace, AwsCloudWatchStatsdBackend, and send an http request to CloudWatch via awssum.
+The above will create a metric with the default namespace, AwsCloudWatchStatsdBackend, and send an http request to CloudWatch via the AWS SDK.
 
 See the CloudWatch [documentation](http://docs.amazonwebservices.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html) for more information on these concepts.
 
